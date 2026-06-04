@@ -1,5 +1,5 @@
 #!/bin/bash
-IN=/Users/Shared/ss_size.txt
+IN=/Users/Shared/sandbox_screen_size.txt
 CHROME=28
 last=""
 while true; do
