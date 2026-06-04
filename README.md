@@ -73,7 +73,7 @@ I found no same-machine path to Dynamic Resolution. The scripts reproduce its be
 
 ## 5. The resize scripts
 
-**Architecture:** `publisher.sh` (primary) → shared file → `watcher.sh` (sandbox). Both accounts share the loopback interface and the filesystem, so a world-writable file at **`/Users/Shared/ss_size.txt`** is all the IPC you need — no second tunnel. The scripts assume **Actual Size (scaling off)** so window points map ~1:1 to sandbox points.
+**Architecture:** `publisher.sh` (primary) → shared file → `watcher.sh` (sandbox). Both accounts share the loopback interface and the filesystem, so a world-writable file at **`/Users/Shared/ss_size.txt`** is all the [IPC](https://en.wikipedia.org/wiki/Inter-process_communication) you need — no second tunnel. The scripts assume **Actual Size (scaling off)** so window points map ~1:1 to sandbox points.
 
 **publisher.sh — run in `primary`**
 - Polls the Screen Sharing window size via one System Events `osascript` call (~0.1s). That call is unavoidable each tick (no cheaper way to detect a resize), so this side can't poll as fast as the watcher.
