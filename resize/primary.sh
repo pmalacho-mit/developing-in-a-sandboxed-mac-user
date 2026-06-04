@@ -1,5 +1,5 @@
 #!/bin/bash
-OUT=/Users/Shared/ss_size.txt
+OUT=/Users/Shared/sandbox_screen_size.txt
 TMP="$OUT.tmp"
 last=""
 while true; do
