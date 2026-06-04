@@ -26,7 +26,7 @@ All under **System Settings → General → Sharing** unless noted.
 **Screen Sharing** — turn on, click the ⓘ, and set "**Allow access for: Only these users**" and add `sandbox` (in it addition to `Adminstrators`).
 
 **Remote Login (SSH)** — turn on (required for the tunnel). Verify: `sudo systemsetup -getremotelogin`.
-> If you click the ⓘ, leave **"Allow access for: Only these users" as `Administrators`** and **"Allow full disk access for remote users" OFF.** The tunnel only forwards a port; enabling this would hand every SSH session your protected data for no benefit.
+> If you click the ⓘ, leave **"Allow access for: Only these users"** as  `Administrators` and **"Allow full disk access for remote users"** as **OFF.** The tunnel only forwards a port; enabling this would hand every SSH session your protected data for no benefit.
 
 ---
 
