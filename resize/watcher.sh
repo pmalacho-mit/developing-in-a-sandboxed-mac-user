@@ -5,7 +5,7 @@ PERIOD=10   # forced full pass every PERIOD iterations (10 * 0.05s ≈ 0.5s)
 
 # Programs to control — pass as arguments, e.g.:  ./watcher.sh Code "Docker Desktop"
 PROCS=("$@")
-[ ${#PROCS[@]} -eq 0 ] && PROCS=("Code")
+[ ${#PROCS[@]} -eq 0 ] && PROCS=("Code") # Defaults to watching Visual Studio Code
 
 last=""
 count=0
