@@ -6,9 +6,9 @@ macOS resists both halves of this: it blocks sharing your own machine's screen, 
 
 ## How it works
 
-1. Both accounts stay logged in via Fast User Switching.
+1. Both accounts stay logged in via [Fast User Switching](https://support.apple.com/guide/mac-help/switch-quickly-between-users-mchlp2439/mac).
 2. `primary` connects to the sandbox session over Screen Sharing, **tunneled through SSH** to defeat the same-machine block.
-3. A **publisher** script in `primary` reports the live size of the Screen Sharing window into a shared file; a **watcher** script in `sandbox` reads it and resizes the target app windows to match. This is the manual _(clunky, but workable)_ replacement for Dynamic Resolution (as long as you're comfortable looking at one program at a time).
+3. A **publisher** script in `primary` reports the live size of the Screen Sharing window into a shared file; a **watcher** script in `sandbox` reads it and resizes the target app windows to match. This is the manual _(clunky, but workable)_ replacement for Dynamic Resolution (as long as you're comfortable looking at mostly one program at a time).
 
 ## Prerequisites
 
@@ -63,7 +63,11 @@ In the Screen Sharing app:
 
 ---
 
-## 4. Why the resize scripts exist (the Dynamic Resolution dead end)
+## 4. Dynamic Window Resizing
+
+---
+
+### 4a. Dynamic Resolution dead end
 
 macOS has a feature that auto-matches the remote display to the Screen Sharing window — **Dynamic Resolution** — but it's unreachable here. Worth knowing why, so you don't burn time on it:
 
@@ -75,9 +79,26 @@ I found no same-machine path to Dynamic Resolution. The [resize scripts](#5-the-
 
 ---
 
-## 5. The resize scripts
+### 4b. Permissions (TCC) — nothing resizes without this
 
-**Architecture:** `publisher.sh` (primary) → shared file → `watcher.sh` (sandbox). Both accounts share the loopback interface and the filesystem, so a world-writable file at **`/Users/Shared/ss_size.txt`** is all the [IPC](https://en.wikipedia.org/wiki/Inter-process_communication) you need — no second tunnel. The scripts assume **Actual Size (scaling off)** so window points map ~1:1 to sandbox points.
+Both [resize scripts](#4b-resize-scripts) drive **System Events**, which needs two permissions **per account** (which should each be set via [FUS](https://support.apple.com/guide/mac-help/switch-quickly-between-users-mchlp2439/mac), not over Screen Sharing, see more below):
+
+- **Automation** → Privacy & Security → Automation → enable **Terminal → System Events**. (Missing this is the `-1743 "Not authorized to send Apple events"` error.)
+- **Accessibility** → Privacy & Security → Accessibility → enable **Terminal**. (Lets System Events actually move/resize windows.)
+
+Two hard-won gotchas:
+
+> **TCC prompts can't be approved over Screen Sharing.** macOS refuses to let security dialogs be approved through a remote/synthetic input path, so the prompt flashes and vanishes. **Switch to the account physically via Fast User Switching, approve there, then return to the share.** The grant sticks regardless of how you connect afterward.
+
+> **Stop the watcher loop before approving.** A running loop re-triggers the request every tick and strobes the prompt out of existence. Kill the loop, approve once, restart it.
+
+If a prompt won't appear at all, reset and retry (per account): `tccutil reset AppleEvents`.
+
+---
+
+### 4c. The resize scripts
+
+**Architecture:** `publisher.sh` (primary) → shared file → `watcher.sh` (sandbox). Both accounts share the loopback interface and the filesystem, so a world-writable file at **`/Users/Shared/sandbox_screen_size.txt`** is all the [IPC](https://en.wikipedia.org/wiki/Inter-process_communication) you need — no second tunnel. The scripts assume **Actual Size (scaling off)** so window points map ~1:1 to sandbox points.
 
 **publisher.sh — run in `primary`**
 - Polls the Screen Sharing window size via one System Events `osascript` call (~0.1s). That call is unavoidable each tick (no cheaper way to detect a resize), so this side can't poll as fast as the watcher.
