@@ -1,6 +1,6 @@
 # sandboxed-mac-user
 
-Run macOS Screen Sharing between two user accounts on **one physical Mac** (a `primary` account you work in and a `sandbox` you want to view/control), with app windows in the sandbox **auto-sizing to fill the Screen Sharing window** as you resize it.
+Run macOS Screen Sharing between two user accounts on **one physical Mac** (a `primary` account you work in and a `sandbox` you want to view/control that likely has lesser permissions and access to sensitive files), with app windows in the sandbox **auto-sizing to fill the Screen Sharing window** as you resize it.
 
 macOS resists both halves of this: it blocks sharing your own machine's screen, and its window-matching feature (Dynamic Resolution) is unavailable in this configuration. This repo works around both.
 
@@ -8,7 +8,7 @@ macOS resists both halves of this: it blocks sharing your own machine's screen, 
 
 1. Both accounts stay logged in via Fast User Switching.
 2. `primary` connects to the sandbox session over Screen Sharing, **tunneled through SSH** to defeat the same-machine block.
-3. A **publisher** script in `primary` reports the live size of the Screen Sharing window into a shared file; a **watcher** script in `sandbox` reads it and resizes the target app windows to match. This is the manual _(clunky, but workable)_ replacement for Dynamic Resolution.
+3. A **publisher** script in `primary` reports the live size of the Screen Sharing window into a shared file; a **watcher** script in `sandbox` reads it and resizes the target app windows to match. This is the manual _(clunky, but workable)_ replacement for Dynamic Resolution (as long as you're comfortable looking at one program at a time).
 
 ## Prerequisites
 
