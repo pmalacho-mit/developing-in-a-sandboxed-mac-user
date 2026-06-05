@@ -43,7 +43,11 @@ ssh -fN -L 5901:localhost:5900 localhost
 
 Then point the **Screen Sharing** app at `vnc://localhost:5901` and authenticate as **sandbox**.
 
-Stop the tunnel later with `pkill -f "5901:localhost:5900"`.
+Stop the tunnel later with: 
+
+```sh
+pkill -f "5901:localhost:5900"
+```
 
 ---
 
