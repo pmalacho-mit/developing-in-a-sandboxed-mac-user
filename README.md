@@ -123,22 +123,9 @@ If a prompt won't appear at all, reset and retry (per account): `tccutil reset A
 - `publisher.sh` → local Terminal in `primary`.
 - `watcher.sh` → local Terminal in `sandbox` (open one inside the share).
 
----
+### Application Specific Workflows
 
-## 6. Permissions (TCC) — nothing resizes without this
-
-Both scripts drive **System Events**, which needs two permissions **per account** (grants in `primary` do nothing for `sandbox`, and vice-versa):
-
-- **Automation** → Privacy & Security → Automation → enable **Terminal → System Events**. (Missing this is the `-1743 "Not authorized to send Apple events"` error.)
-- **Accessibility** → Privacy & Security → Accessibility → enable **Terminal**. (Lets System Events actually move/resize windows.)
-
-Two hard-won gotchas:
-
-> **TCC prompts can't be approved over Screen Sharing.** macOS refuses to let security dialogs be approved through a remote/synthetic input path, so the prompt flashes and vanishes. **Switch to the account physically via Fast User Switching, approve there, then return to the share.** The grant sticks regardless of how you connect afterward. Apply this to every future permission grant in `sandbox`.
-
-> **Stop the watcher loop before approving.** A running loop re-triggers the request every tick and strobes the prompt out of existence. Kill the loop, approve once, restart it.
-
-If a prompt won't appear at all, reset and retry (per account): `tccutil reset AppleEvents`.
+The resizing scripts effectively assume you are only going to be interacting with one window at a time (since each will be forced to take up the entire viewport of the Screen Sharing window)
 
 ---
 
