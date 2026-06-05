@@ -13,7 +13,7 @@ macOS resists both halves of this: it blocks sharing your own machine's screen, 
 ## Prerequisites
 
 - Two accounts: `primary` (admin) and `sandbox` (standard).
-- The scripts in this repo: `publisher.sh`, `watcher.sh`.
+- The scripts in this repo: [`publisher.sh`](./resize/`publisher.sh), [`watcher.sh`](./watcher.sh) (both in [resize/](./resize)).
 
 ---
 
