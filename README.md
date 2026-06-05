@@ -71,7 +71,7 @@ macOS has a feature that auto-matches the remote display to the Screen Sharing w
 - High Performance requires **UDP 5900–5902** between endpoints. An SSH tunnel forwards **TCP only**, so High Performance can't function through it.
 - Connecting High Performance **directly** to `localhost` (no tunnel) still hits **"You cannot control your own screen"** — the block fires before any virtual display is created.
 
-I found no same-machine path to Dynamic Resolution. The scripts reproduce its behavior by driving **window** size instead of **display** size — which touches neither the connection type nor the resolution, so nothing blocks it.
+I found no same-machine path to Dynamic Resolution. The [resize scripts](#5-the-resize-scripts) attempt to approximate this behavior by driving **window** size instead of **display** size — which touches neither the connection type nor the resolution, so nothing blocks it.
 
 ---
 
