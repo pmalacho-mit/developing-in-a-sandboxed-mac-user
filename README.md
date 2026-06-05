@@ -134,9 +134,9 @@ If a prompt won't appear at all, reset and retry (per account): `tccutil reset A
 |---|---|---|
 | "You cannot control your own screen" | Direct same-machine VNC is blocked | Connect through the SSH tunnel (`vnc://localhost:5901`) |
 | `ssh: connect to host ... port 22: Connection refused` | Remote Login isn't actually running | Enable Remote Login (toggle off/on); `sudo systemsetup -setremotelogin on` |
-| Correct sandbox password rejected on connect | Account not in Screen Sharing's access list | Add sandbox under *Allow access for*, or use *All users* |
+| Correct sandbox password rejected on connect | Account not in Screen Sharing's access list | Add sandbox under *Allow access for* |
 | `-1743 Not authorized to send Apple events` | Automation permission missing for that account | Grant Terminal → System Events in Privacy & Security → Automation (in that account) |
-| Permission prompt appears then instantly vanishes | Polling loop re-triggering it, or approving over the share | Stop the loop; approve from the FUS console, not the share |
+| Permission prompt appears then instantly vanishes (in sandbox) | Polling loop re-triggering it, or approving over the share | Stop the loop; approve via  FUS, not the  |
 | Automation worked, then broke after starting the tunnel | Script is running inside the SSH session (no GUI session) | Background the tunnel (`-fN`); run scripts in local Terminals |
 | Dynamic Resolution toolbar icon greyed out | Known quirk | Enable via System Settings → Displays instead — but it's moot here (next row) |
 | Dynamic Resolution unavailable entirely | High Performance needs UDP (tunnel is TCP); direct localhost hits the self-screen block | Not solvable — use the resize scripts |
