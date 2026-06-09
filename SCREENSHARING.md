@@ -19,7 +19,7 @@ macOS resists both halves of this: it blocks sharing your own machine's screen, 
 
 ## 1. System setup
 
-All under **System Settings → General → Sharing** unless noted.
+All under _**<u>System Settings</u> → <u>General</u> → <u>Sharing</u>**_ (unless noted).
 
 **Fast User Switching** — enable it, and log into `sandbox` at least once so its session is live. You can only share a *running* session.
 
