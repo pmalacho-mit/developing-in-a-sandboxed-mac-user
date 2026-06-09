@@ -8,7 +8,7 @@ macOS resists both halves of this: it blocks sharing your own machine's screen, 
 
 1. Both accounts stay logged in via [Fast User Switching](https://support.apple.com/guide/mac-help/switch-quickly-between-users-mchlp2439/mac).
 2. `primary` connects to the sandbox session over Screen Sharing, **tunneled through SSH** to defeat the same-machine block.
-3. A **publisher** script in `primary` reports the live size of the Screen Sharing window into a shared file; a **watcher** script in `sandbox` reads it and resizes the target app windows to match. This is the manual replacement for Dynamic Resolution (_clunky, but workable,_ as long as you're comfortable looking at mostly one program at a time).
+3. A **publisher** script in `primary` reports the live size of the Screen Sharing window into a shared file; a **watcher** script in `sandbox` reads it and resizes the target app windows to match. This is the manual replacement for Dynamic Resolution (_clunky, but workable,_ as long as you're comfortable looking at mostly one program / window at a time).
 
 ## Prerequisites
 
