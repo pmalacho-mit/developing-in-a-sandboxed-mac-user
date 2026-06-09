@@ -1,6 +1,6 @@
 # Same-Machine macOS Screen Sharing + Auto-Resize
 
-Run macOS Screen Sharing between two user accounts on **one physical Mac** (a `primary` account you work in and a `sandbox` you want to view/control that likely has lesser permissions and access to sensitive files), with app windows in the sandbox **auto-sizing to fill the Screen Sharing window** as you resize it.
+Run macOS Screen Sharing between two user accounts on **one physical Mac** (a `primary` account you work in and a `sandbox` you want to view/control that likely has lesser permissions and restricted access to sensitive files), with app windows in the sandbox **auto-sizing to fill the Screen Sharing window** as you resize it.
 
 macOS resists both halves of this: it blocks sharing your own machine's screen, and its window-matching feature (Dynamic Resolution) is unavailable in this configuration. This repo works around both.
 
